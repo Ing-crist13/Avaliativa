@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -103,5 +105,32 @@ public class ClienteDAO {
             System.out.println("Erro ao consultar cliente: " + ex.getMessage());
             return null;
         }
+    }
+    public List<Cliente> getCliente(){
+          String sql = "SELECT * FROM tb_cliente";
+        
+        try 
+        {
+            PreparedStatement stmt = conn.prepareStatement(
+                sql,
+                ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_UPDATABLE
+            );
+            
+            ResultSet rs = stmt.executeQuery();
+            List<Cliente> listaCliente = new ArrayList<>();
+            
+        while(rs.next()){
+            Cliente c = new Cliente();
+            c.setId(rs.getInt("cli_id"));
+            c.setNome(rs.getString("cli_nome"));
+            listaCliente.add(c);
+            
+        }
+        return listaCliente;
+    }catch(SQLException ex){
+            System.out.println("Erro ao consultar clientes: "+ ex.getMessage());
+            return null;
+    }
     }
 }

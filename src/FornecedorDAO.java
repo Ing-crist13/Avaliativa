@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -103,5 +105,33 @@ public class FornecedorDAO {
             System.out.println("Erro ao consultar produto: " + ex.getMessage());
             return null;
         }
+    }
+    
+     public List<Fornecedor> getFornecedor(){
+          String sql = "SELECT * FROM tb_fornecedores";
+        
+        try 
+        {
+            PreparedStatement stmt = conn.prepareStatement(
+                sql,
+                ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_UPDATABLE
+            );
+            
+            ResultSet rs = stmt.executeQuery();
+            List<Fornecedor> listaFornecedor = new ArrayList<>();
+            
+        while(rs.next()){
+            Fornecedor f = new Fornecedor();
+            f.setId(rs.getInt("forn_id"));
+            f.setNome(rs.getString("forn_nome"));
+            listaFornecedor.add(f);
+            
+        }
+        return listaFornecedor;
+    }catch(SQLException ex){
+            System.out.println("Erro ao consultar fornecedores: "+ ex.getMessage());
+            return null;
+    }
     }
 }

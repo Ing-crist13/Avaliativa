@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -84,8 +85,6 @@ public class ProdutoDAO {
                 ResultSet.CONCUR_UPDATABLE
             );
             
-
-
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery(); // obtenho o retorno da consulta e armazeno no ResultSet
             
@@ -99,8 +98,7 @@ public class ProdutoDAO {
             p.setPreco(rs.getDouble("prod_preco"));
             p.setCategoria(rs.getInt("id"));
             p.setCodBarras(rs.getInt("prod_cod"));
-            
-            
+  
             return p;
         } 
         catch (SQLException ex) 
@@ -108,6 +106,37 @@ public class ProdutoDAO {
             System.out.println("Erro ao consultar produto: " + ex.getMessage());
             return null;
         }
+    }
+    
+    public java.util.List<Produtos> getProduto(int codBarras){
+          String sql = "SELECT * FROM tb_produto where prod_cod = ? ";
+        
+        try 
+        {
+            PreparedStatement stmt = conn.prepareStatement(
+                sql,
+                ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_UPDATABLE
+            );
+            
+            stmt.setInt(1, codBarras);
+            ResultSet rs = stmt.executeQuery();
+            java.util.List<Produtos> listaProdutos = new ArrayList<>();
+            
+        while(rs.next()){
+            Produtos p = new Produtos();
+            p.setId(rs.getInt("prod_id"));
+            p.setNome(rs.getString("prod_nome"));
+            p.setPreco(rs.getDouble("prod_preco"));
+            p.setCodBarras(rs.getInt("prod_cod"));
+            listaProdutos.add(p);
+            
+        }
+        return listaProdutos;
+    }catch(SQLException ex){
+            System.out.println("Erro ao consultar Produtos: "+ ex.getMessage());
+            return null;
+    }
     }
     
 }

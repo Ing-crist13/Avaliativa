@@ -45,6 +45,10 @@ public class Fornecedor {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
+    
+    public String toString(){
+        return this.id+" - "+this.nome;
+    }
 
    
     
