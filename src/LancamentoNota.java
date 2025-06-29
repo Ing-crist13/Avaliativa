@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ingridsouza
  */
 public class LancamentoNota extends javax.swing.JFrame {
-
+     double valorTotal = 0.0;
     /**
      * Creates new form LancamentoNota
      */
@@ -21,7 +21,7 @@ public class LancamentoNota extends javax.swing.JFrame {
         initComponents();
         preencherComboCliente();
         preencherComboFornecedor();
-       // preencherTabela();
+        
     }
      public void preencherComboCliente(){
           ClienteDAO cDao = new ClienteDAO();
@@ -57,7 +57,7 @@ public class LancamentoNota extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cod_prod = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_quantidade = new javax.swing.JTextField();
         btn_lancar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_produtos = new javax.swing.JTable();
@@ -70,6 +70,18 @@ public class LancamentoNota extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_valor = new javax.swing.JTextField();
         btn_salvar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txt_idProd = new javax.swing.JTextField();
+        btn_buscar = new javax.swing.JButton();
+        btn_gerar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,13 +122,10 @@ public class LancamentoNota extends javax.swing.JFrame {
 
         tbl_produtos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nome", "Preço","Qtd.",  "Cod.Barras"
             }
         ));
         jScrollPane2.setViewportView(tbl_produtos);
@@ -136,6 +145,65 @@ public class LancamentoNota extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("ID:");
+
+        btn_buscar.setText("Buscar");
+        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarActionPerformed(evt);
+            }
+        });
+
+        btn_gerar.setText("Gerar ID");
+        btn_gerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_gerarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Gerar PDF");
+
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("Categorias");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Produtos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Clientes");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Fornecedores");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,34 +211,9 @@ public class LancamentoNota extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmb_cli, 0, 211, Short.MAX_VALUE)
-                            .addComponent(cod_prod)
-                            .addComponent(cmb_fornecedor, 0, 213, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
-                            .addComponent(txt_valor)
-                            .addComponent(id_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel6)
-                        .addGap(142, 142, 142)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,24 +221,67 @@ public class LancamentoNota extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btn_lancar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(btn_salvar)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addComponent(btn_salvar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1))
+                                    .addComponent(jLabel4))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel6)
+                                .addGap(142, 142, 142)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_gerar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmb_cli, 0, 211, Short.MAX_VALUE)
+                                    .addComponent(cmb_fornecedor, 0, 213, Short.MAX_VALUE)
+                                    .addComponent(txt_quantidade)
+                                    .addComponent(txt_valor)
+                                    .addComponent(id_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cod_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_idProd)))
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_buscar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(161, 161, 161))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmb_cli, cmb_fornecedor, cod_prod, jTextField1});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmb_cli, cmb_fornecedor, txt_quantidade});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_lancar, btn_salvar});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(id_nota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_gerar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -207,11 +293,14 @@ public class LancamentoNota extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cod_prod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel9)
+                    .addComponent(txt_idProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_buscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -219,7 +308,8 @@ public class LancamentoNota extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_lancar)
-                    .addComponent(btn_salvar))
+                    .addComponent(btn_salvar)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -234,41 +324,113 @@ public class LancamentoNota extends javax.swing.JFrame {
 
     private void btn_lancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lancarActionPerformed
         int CodBarras = Integer.parseInt(cod_prod.getText());
+        int quantidade = Integer.parseInt(txt_quantidade.getText());
+       String valorTexto = txt_valor.getText().replace(",", ".");
         
         ProdutoDAO pDAO = new ProdutoDAO();
          List<Produtos> listaProdutos = pDAO.getProduto(CodBarras);
          DefaultTableModel tabelaProdutos = (DefaultTableModel) tbl_produtos.getModel();
-         
-         tabelaProdutos.setNumRows(0);
          
          for(Produtos p: listaProdutos){
              Object[] obj = new Object[]{
                  p.getId(),
                  p.getNome(),
                  p.getPreco(),
+                 quantidade,
                  p.getCodBarras()
+                 
              };
+             
+          
              tabelaProdutos.addRow(obj);
              
+             valorTotal += p.getPreco() * quantidade;
+             
+             txt_valor.setText(String.format("%.2f", valorTotal));
          } 
+         
      
     }//GEN-LAST:event_btn_lancarActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        Cliente c = (Cliente) cmb_cli.getSelectedItem();
-        Fornecedor f = (Fornecedor) cmb_fornecedor.getSelectedItem();
-        
-        Nota n = new Nota();
-        n.setData(txt_data.getText());
-        n.setValor(Double.valueOf(txt_valor.getText()));
-        n.setCliente(c.getId());
-        n.setFornecedor(f.getId());
-        
+         
+         int idNota = Integer.parseInt(id_nota.getText());
+         DefaultTableModel tabela = (DefaultTableModel) tbl_produtos.getModel();
         
         NotaDAO estoque = new NotaDAO();
-        estoque.inserirC(n);
+        
+        for (int i = 0; i < tabela.getRowCount(); i++) {
+        Nota n = new Nota();
+    
+        n.setId(idNota); // ID da nota
+        n.setProdutos(tabela.getValueAt(i, 0).toString()); // Supondo que a coluna 0 é o ID do produto
+        n.setQuantidade((int) tabela.getValueAt(i, 3));     // Coluna 3 = quantidade
+        n.setUnitario((double) tabela.getValueAt(i, 2));    // Coluna 2 = preço unitário
+
+    estoque.inserirI(n);
+    }
+     
         JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
+    
     }//GEN-LAST:event_btn_salvarActionPerformed
+
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        int idProduto = Integer.parseInt(txt_idProd.getText());
+        ProdutoDAO pDAO = new ProdutoDAO();
+        
+        Produtos p = pDAO.getProdutos(idProduto);
+        if(p==null){
+            cod_prod.setText("");
+            JOptionPane.showMessageDialog(this,"Produto não encontrado");    
+        }else{
+
+           cod_prod.setText(String.valueOf(p.getCodBarras()));
+   
+            
+        }
+    }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void btn_gerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gerarActionPerformed
+       Cliente c = (Cliente) cmb_cli.getSelectedItem();
+        Fornecedor f = (Fornecedor) cmb_fornecedor.getSelectedItem();
+
+        Nota n = new Nota();
+        n.setData(txt_data.getText());
+        n.setValor(Double.parseDouble(txt_valor.getText()));
+        n.setCliente(c.getId());
+        n.setFornecedor(f.getId());
+
+        NotaDAO estoque = new NotaDAO();
+        int idNota = estoque.inserirC(n);
+
+        if (idNota > 0) {
+        JOptionPane.showMessageDialog(null, "ID gerado com sucesso: " + idNota);
+            } else {
+           JOptionPane.showMessageDialog(null, "Erro ao inserir nota!");
+}
+
+        
+    }//GEN-LAST:event_btn_gerarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        CategoriaJ c = new CategoriaJ();
+       c.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        ProdutoJ p = new ProdutoJ();
+        p.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        ClienteJ c = new ClienteJ();
+        c.show();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FornecedorJ f = new FornecedorJ();
+        f.show();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,12 +468,15 @@ public class LancamentoNota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_buscar;
+    private javax.swing.JButton btn_gerar;
     private javax.swing.JButton btn_lancar;
     private javax.swing.JButton btn_salvar;
     private javax.swing.JComboBox cmb_cli;
     private javax.swing.JComboBox cmb_fornecedor;
     private javax.swing.JTextField cod_prod;
     private javax.swing.JTextField id_nota;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -320,12 +485,21 @@ public class LancamentoNota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tbl_produtos;
     private javax.swing.JTextField txt_data;
+    private javax.swing.JTextField txt_idProd;
+    private javax.swing.JTextField txt_quantidade;
     private javax.swing.JTextField txt_valor;
     // End of variables declaration//GEN-END:variables
 }

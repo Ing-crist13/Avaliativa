@@ -13,10 +13,52 @@ import java.time.LocalDate;
  */
 public class Nota {
      private int id;
+     private int id_itens;
     private String data;
     private Double valor;
     private int cliente;
     private int fornecedor;
+    private int quantidade;
+    private Double unitario;
+    private String produtos;
+
+    public String getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(String produtos) {
+        this.produtos = produtos;
+    }
+    
+    
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Double getUnitario() {
+        return unitario;
+    }
+
+    public void setUnitario(Double unitario) {
+        this.unitario = unitario;
+    }
+    
+    
+
+    public int getId_itens() {
+        return id_itens;
+    }
+
+    public void setId_itens(int id_itens) {
+        this.id_itens = id_itens;
+    }
+    
+    
 
     public int getCliente() {
         return cliente;
